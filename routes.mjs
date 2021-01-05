@@ -2,7 +2,7 @@ import db from './models/index.mjs';
 
 // import your controllers here
 
-export default function routes( app ){
+export default function bindRoutes(app) {
 
   // initialize the controller functions here
   // pass in the db for all callbacks
