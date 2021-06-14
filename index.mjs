@@ -6,6 +6,10 @@ import bindRoutes from './routes.mjs';
 
 // Initialise Express instance
 const app = express();
+app.use(cors({
+  credentials:true,
+  origin: FRONTEND_URL
+}));
 // Set the Express view engine to expect EJS templates
 app.set('view engine', 'ejs');
 // Bind cookie parser middleware to parse cookies in requests
