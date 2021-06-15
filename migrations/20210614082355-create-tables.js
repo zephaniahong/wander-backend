@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-expressions */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('users', {
@@ -62,7 +64,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable('items', {
+    await queryInterface.createTable('appointments', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -88,8 +90,14 @@ module.exports = {
       place_id: {
         type: Sequelize.STRING,
       },
-      type: {
+      types: {
         type: Sequelize.ARRAY(Sequelize.STRING),
+      },
+      start_date: {
+        type: Sequelize.DATE,
+      },
+      end_date: {
+        type: Sequelize.DATE,
       },
       created_at: {
         allowNull: false,
@@ -101,7 +109,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable('liked_items', {
+    await queryInterface.createTable('liked_appointments', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -115,10 +123,10 @@ module.exports = {
           key: 'id',
         },
       },
-      item_id: {
+      appointment_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'items',
+          model: 'appointments',
           key: 'id',
         },
       },
@@ -134,9 +142,9 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    async (queryInterface, Sequelize) => {
-      await queryInterface.dropTable('liked_items');
-      await queryInterface.dropTable('items');
+    async (queryInterface) => {
+      await queryInterface.dropTable('liked_appointments');
+      await queryInterface.dropTable('appointments');
       await queryInterface.dropTable('trips');
       await queryInterface.dropTable('users');
     };

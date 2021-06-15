@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
-import initItemModel from './item.mjs';
+import initAppointmentModel from './appointment.mjs';
 import initTripModel from './trip.mjs';
 import initUserModel from './user.mjs';
 
@@ -34,17 +34,17 @@ if (env === 'production') {
 
 // const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
-db.Item = initItemModel(sequelize, Sequelize.DataTypes);
+db.Appointment = initAppointmentModel(sequelize, Sequelize.DataTypes);
 db.Trip = initTripModel(sequelize, Sequelize.DataTypes);
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
 
 db.User.hasMany(db.Trip);
 db.Trip.belongsTo(db.User);
 
-db.Trip.hasMany(db.Item);
-db.Item.belongsTo(db.Trip);
+db.Trip.hasMany(db.Appointment);
+db.Appointment.belongsTo(db.Trip);
 
-db.User.belongsToMany(db.Item, { through: 'liked_items' });
+db.User.belongsToMany(db.Appointment, { through: 'liked_appointments' });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
