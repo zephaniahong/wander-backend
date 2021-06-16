@@ -11,6 +11,6 @@ export default function bindRoutes(app) {
   const AppointmentsController = initAppointmentsController(db);
   // initialize the controller functions here
   // pass in the db for all callbacks
-  app.post('/add_item/:tripId', AppointmentsController.addItem);
+  app.post('/add_appointment/:tripId', AppointmentsController.addAppointment);
   app.get('/get_appointments/:tripId', AppointmentsController.getAppointments);
 }

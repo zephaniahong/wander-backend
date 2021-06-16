@@ -1,12 +1,12 @@
 export default function initAppointmentsController(db) {
-  const addItem = async (req, res) => {
+  const addAppointment = async (req, res) => {
     const { tripId } = req.params;
     const {
       description, place_id, structured_formatting, types,
     } = req.body.infoObj;
     const { main_text, secondary_text } = structured_formatting;
     try {
-      const item = await db.Item.create({
+      const appointment = await db.Item.create({
         description,
         tripId,
         type: types,
@@ -15,9 +15,9 @@ export default function initAppointmentsController(db) {
         secondaryText: secondary_text,
       });
 
-      res.send(item);
+      res.send(appointment);
     } catch (err) {
-      console.log('addItem', err);
+      console.log('addAppointment', err);
     }
   };
 
@@ -36,6 +36,6 @@ export default function initAppointmentsController(db) {
   };
 
   return {
-    addItem, getAppointments,
+    addAppointment, getAppointments,
   };
 }
