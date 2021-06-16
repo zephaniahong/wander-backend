@@ -36,7 +36,19 @@ export default function initAppointmentsController(db) {
     }
   };
 
+  const deleteAppointment = async (req, res) => {
+    const { appointmentId } = req.params;
+    try {
+      await db.Appointment.destroy({
+        where: {
+          id: appointmentId,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return {
-    addAppointment, getAppointments,
+    addAppointment, getAppointments, deleteAppointment,
   };
 }
