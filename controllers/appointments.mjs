@@ -1,4 +1,4 @@
-export default function initItemsController(db) {
+export default function initAppointmentsController(db) {
   const addItem = async (req, res) => {
     const { tripId } = req.params;
     const {
@@ -21,21 +21,21 @@ export default function initItemsController(db) {
     }
   };
 
-  const getItems = async (req, res) => {
+  const getAppointments = async (req, res) => {
     const { tripId } = req.params;
     try {
-      const items = await db.Item.findAll({
+      const appointments = await db.Appointment.findAll({
         where: {
           tripId,
         },
       });
-      res.send(items);
+      res.send(appointments);
     } catch (err) {
       console.log(err);
     }
   };
 
   return {
-    addItem, getItems,
+    addItem, getAppointments,
   };
 }
