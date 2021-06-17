@@ -1,5 +1,27 @@
+const jsSHA = require('jssha');
+const faker = require('faker');
+
 module.exports = {
   up: async (queryInterface) => {
+    const users = [];
+    for (let i = 0; i < 50; i += 1) {
+      const shaObj = new jsSHA('SHA-256', 'TEXT', { encoding: 'UTF8' });
+      shaObj.update('password');
+      const userObj = {
+        name: faker.internet.userName(),
+        email: faker.internet.email(),
+        password: shaObj.getHash('HEX'),
+        created_at: new Date(),
+        updated_at: new Date(),
+      };
+      users.push(userObj);
+    }
+    await queryInterface.bulkInsert('users', users);
+    const trip = [{
+      user_id: 1, country: 'Japan', city: 'Tokyo', start_date: '2021-07-20', end_date: '2021-07-25', created_at: new Date(), updated_at: new Date(),
+    }];
+    await queryInterface.bulkInsert('trips', trip);
+
     const appointments = [
       {
         description: 'Hunter James Kelly Research Institute, Ellicott Street, Buffalo, NY, USA',
