@@ -78,7 +78,7 @@ module.exports = {
           key: 'id',
         },
       },
-      description: {
+      text: {
         type: Sequelize.STRING,
       },
       main_text: {
@@ -142,7 +142,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    async (queryInterface) => {
+    async (queryInterface, Sequelize) => {
       await queryInterface.dropTable('liked_appointments');
       await queryInterface.dropTable('appointments');
       await queryInterface.dropTable('trips');

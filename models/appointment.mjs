@@ -15,7 +15,7 @@ export default function initAppointmentModel(sequelize, DataTypes) {
           key: 'id',
         },
       },
-      description: {
+      text: {
         type: DataTypes.STRING,
       },
       mainText: {
@@ -30,10 +30,10 @@ export default function initAppointmentModel(sequelize, DataTypes) {
       types: {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
-      start_date: {
+      startDate: {
         type: DataTypes.DATE,
       },
-      end_date: {
+      endDate: {
         type: DataTypes.DATE,
       },
       createdAt: {

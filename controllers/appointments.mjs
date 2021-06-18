@@ -2,17 +2,17 @@ export default function initAppointmentsController(db) {
   const addAppointment = async (req, res) => {
     const { tripId } = req.params;
     const {
-      description, place_id, structured_formatting, types, startDate, endDate,
+      text, place_id, structured_formatting, types, startDate, endDate,
     } = req.body;
     const { main_text, secondary_text } = structured_formatting;
     try {
       const appointment = await db.Appointment.create({
-        description,
+        text,
         tripId,
         types,
         placeId: place_id,
-        start_date: new Date(startDate),
-        end_date: new Date(endDate),
+        startDate: new Date(startDate),
+        endDate: new Date(endDate),
         mainText: main_text,
         secondaryText: secondary_text,
       });
