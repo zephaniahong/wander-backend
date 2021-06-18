@@ -18,6 +18,12 @@ export default function initAppointmentModel(sequelize, DataTypes) {
       text: {
         type: DataTypes.STRING,
       },
+      lat: {
+        type: DataTypes.INTEGER,
+      },
+      lng: {
+        type: DataTypes.INTEGER,
+      },
       mainText: {
         type: DataTypes.STRING,
       },

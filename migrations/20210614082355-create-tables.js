@@ -81,6 +81,12 @@ module.exports = {
       text: {
         type: Sequelize.STRING,
       },
+      lat: {
+        type: Sequelize.INTEGER,
+      },
+      lng: {
+        type: Sequelize.INTEGER,
+      },
       main_text: {
         type: Sequelize.STRING,
       },
