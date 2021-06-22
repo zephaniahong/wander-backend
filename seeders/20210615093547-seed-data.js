@@ -24,7 +24,7 @@ module.exports = {
 
     const appointments = [
       {
-        text: 'Hunter James Kelly Research Institute, Ellicott Street, Buffalo, NY, USA',
+        title: 'Hunter James Kelly Research Institute, Ellicott Street, Buffalo, NY, USA',
         start_date: new Date('2021-05-24T19:00:00.000Z'),
         end_date: new Date('2021-05-24T20:00:00.000Z'),
         lat: 42.897995230726714,
@@ -38,7 +38,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        text: 'H. J. Kitchen & Bath, Midwest Road, Scarborough, ON, Canada',
+        title: 'H. J. Kitchen & Bath, Midwest Road, Scarborough, ON, Canada',
         start_date: new Date('2021-05-25T17:00:00.000Z'),
         end_date: new Date('2021-05-25T18:00:00.000Z'),
         lat: 43.76531624950131,
@@ -52,7 +52,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        text: 'HJK GHJ, Airport Road, Caledon East, ON, Canada',
+        title: 'HJK GHJ, Airport Road, Caledon East, ON, Canada',
         start_date: new Date('2021-05-25T19:00:00.000Z'),
         end_date: new Date('2021-05-25T20:35:00.000Z'),
         lat: 43.86927068070543,
@@ -66,7 +66,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        text: 'Bnj-kunststoffe GmbH, Wilhelmstraße, Bad Lippspringe, Germany',
+        title: 'Bnj-kunststoffe GmbH, Wilhelmstraße, Bad Lippspringe, Germany',
         start_date: new Date('2021-05-26T19:00:00.000Z'),
         end_date: new Date('2021-05-26T21:00:00.000Z'),
         lat: 51.78619891653598,
@@ -80,7 +80,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        text: 'HJKL LLP, Main Street, Fort Lee, NJ, USA',
+        title: 'HJKL LLP, Main Street, Fort Lee, NJ, USA',
         start_date: new Date('2021-05-27T18:00:00.000Z'),
         end_date: new Date('2021-05-27T19:00:00.000Z'),
         lat: 40.856427889655414,

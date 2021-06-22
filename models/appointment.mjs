@@ -15,14 +15,14 @@ export default function initAppointmentModel(sequelize, DataTypes) {
           key: 'id',
         },
       },
-      text: {
+      title: {
         type: DataTypes.STRING,
       },
       lat: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
       },
       lng: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
       },
       mainText: {
         type: DataTypes.STRING,

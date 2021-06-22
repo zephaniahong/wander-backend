@@ -78,14 +78,14 @@ module.exports = {
           key: 'id',
         },
       },
-      text: {
+      title: {
         type: Sequelize.STRING,
       },
       lat: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       lng: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       main_text: {
         type: Sequelize.STRING,
