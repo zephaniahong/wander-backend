@@ -1,6 +1,29 @@
 import jsSHA from 'jssha';
 
 export default function initUsersController(db) {
+  const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+      const user = await db.User.findOne({
+        where: {
+          email,
+        },
+      });
+
+      const shaObj = new jsSHA('SHA-256', 'TEXT', { encoding: 'UTF8' });
+      shaObj.update(password);
+      if (user.password === shaObj.getHash('HEX')) {
+        console.log('success');
+        res.cookie('userId', user.id);
+        res.sendStatus(200);
+      } else {
+        res.cookie('userId', null);
+        res.sendStatus(403);
+      }
+    } catch (err) {
+      console.log(err);
+    } };
   // const userTrips = async (req, res) => {
   //   const { userId } = req.params;
   //   try {
@@ -57,33 +80,8 @@ export default function initUsersController(db) {
   //   }
   // };
 
-  // const login = async (req, res) => {
-  //   const { email, password } = req.body;
-
-  //   try {
-  //     const user = await db.User.findOne({
-  //       where: {
-  //         email,
-  //       },
-  //     });
-
-  //     const shaObj = new jsSHA('SHA-256', 'TEXT', { encoding: 'UTF8' });
-  //     shaObj.update(password);
-  //     console.log(shaObj.getHash('HEX'));
-
-  //     if (user.password === shaObj.getHash('HEX')) {
-  //       console.log('CORRECT DETAILS');
-  //       res.cookie('userId', user.id);
-  //       res.sendStatus(200);
-  //     } else {
-  //       res.cookie('userId', null);
-  //       res.sendStatus(403);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   } };
-
   return {
-    // userTrips, getLikedItems, addLikedItem, deleteLikedItem, login,
+    // userTrips, getLikedItems, addLikedItem, deleteLikedItem,
+    login,
   };
 }
