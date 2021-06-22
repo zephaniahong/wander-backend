@@ -2,14 +2,16 @@ export default function initAppointmentsController(db) {
   const addAppointment = async (req, res) => {
     const { tripId } = req.params;
     const {
-      text, place_id, structured_formatting, types, startDate, endDate,
+      description, place_id, structured_formatting, types, startDate, endDate, lat, lng,
     } = req.body;
     const { main_text, secondary_text } = structured_formatting;
     try {
       const appointment = await db.Appointment.create({
-        text,
+        text: description,
         tripId,
         types,
+        lat,
+        lng,
         placeId: place_id,
         startDate: new Date(startDate),
         endDate: new Date(endDate),
@@ -48,7 +50,24 @@ export default function initAppointmentsController(db) {
       console.log(err);
     }
   };
+
+  const updateAppointment = async (req, res) => {
+    const data = req.body;
+    const id = Object.keys(data)[0];
+    const changesKeys = Object.keys(data[id]);
+    try {
+      const appointment = await db.Appointment.findByPk(id);
+      for (let i = 0; i < changesKeys.length; i += 1) {
+        console.log('i am length', changesKeys[i]);
+        appointment[changesKeys[i]] = data[id][changesKeys[i]];
+      }
+      await appointment.save();
+      res.send(appointment);
+    } catch (err) {
+      console.log('error updating appointment', err);
+    }
+  };
   return {
-    addAppointment, getAppointments, deleteAppointment,
+    addAppointment, getAppointments, deleteAppointment, updateAppointment,
   };
 }

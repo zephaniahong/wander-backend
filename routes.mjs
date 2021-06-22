@@ -13,5 +13,7 @@ export default function bindRoutes(app) {
   // pass in the db for all callbacks
   app.post('/add_appointment/:tripId', AppointmentsController.addAppointment);
   app.get('/get_appointments/:tripId', AppointmentsController.getAppointments);
-  app.post('/delete_appointment/:tripId/:appointmentId', AppointmentsController.deleteAppointment);
+  app.post('/delete_appointment/:appointmentId', AppointmentsController.deleteAppointment);
+  app.post('/update_appointment', AppointmentsController.updateAppointment);
+  app.post('/login', UsersController.login);
 }
