@@ -35,6 +35,8 @@
     "faker": "^5.5.3",
     "jssha": "^3.2.0",
     "method-override": "^3.0.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5"
   }
