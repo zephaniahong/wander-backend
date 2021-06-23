@@ -1,28 +1,29 @@
 import bcrypt from 'bcrypt';
-import passport from 'passport';
 
 export default function initUsersController(db) {
-  // const login = async (req, res) => {
-  //   const { email, password } = req.body;
+  const login = async (req, res) => {
+    const { email, password } = req.body;
 
-  //   try {
-  //     const user = await db.User.findOne({
-  //       where: {
-  //         email,
-  //       },
-  //     });
-  //     const correctDetails = bcrypt.compare(password, user.password);
-  //     if (correctDetails) {
-  //       console.log('success');
-  //       res.cookie('userId', user.id);
-  //       res.sendStatus(200);
-  //     } else {
-  //       res.cookie('userId', null);
-  //       res.sendStatus(403);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   } };
+    try {
+      const user = await db.User.findOne({
+        where: {
+          email,
+        },
+      });
+      console.log(password);
+      console.log(user.password);
+      const correctDetails = await bcrypt.compare(password, user.password);
+      if (correctDetails) {
+        console.log('success');
+        res.cookie('userId', user.id);
+        res.sendStatus(200);
+      } else {
+        res.cookie('userId', null);
+        res.sendStatus(403);
+      }
+    } catch (err) {
+      console.log(err);
+    } };
 
   // const login = async (req, res) => {
   //   passport.authenticate('local', (err, user, info) => {

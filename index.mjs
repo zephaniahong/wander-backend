@@ -2,7 +2,12 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
 import cors from 'cors';
+import passport from 'passport';
+import session from 'express-session';
+import flash from 'express-flash';
 import bindRoutes from './routes.mjs';
+
+const SECRET = process.env.SESSION_SECRET || 'secret';
 
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 // Initialise Express instance
@@ -11,6 +16,14 @@ app.use(cors({
   credentials: true,
   origin: FRONTEND_URL,
 }));
+app.use(flash());
+app.use(session({
+  secret: SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 // Set the Express view engine to expect EJS templates
 app.set('view engine', 'ejs');
 // Bind cookie parser middleware to parse cookies in requests
@@ -25,7 +38,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 
 // Bind route definitions to the Express application
-bindRoutes(app);
+bindRoutes(app, passport);
 
 // Set Express to listen on the given port
 const PORT = process.env.PORT || 3004;
