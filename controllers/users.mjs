@@ -1,26 +1,52 @@
-import jsSHA from 'jssha';
+import bcrypt from 'bcrypt';
+import passport from 'passport';
 
 export default function initUsersController(db) {
-  const login = async (req, res) => {
+  // const login = async (req, res) => {
+  //   const { email, password } = req.body;
+
+  //   try {
+  //     const user = await db.User.findOne({
+  //       where: {
+  //         email,
+  //       },
+  //     });
+  //     const correctDetails = bcrypt.compare(password, user.password);
+  //     if (correctDetails) {
+  //       console.log('success');
+  //       res.cookie('userId', user.id);
+  //       res.sendStatus(200);
+  //     } else {
+  //       res.cookie('userId', null);
+  //       res.sendStatus(403);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   } };
+
+  // const login = async (req, res) => {
+  //   passport.authenticate('local', (err, user, info) => {
+  //     if (err) throw err;
+  //     if (!user) res.send('No User Exists');
+  //     else {
+  //       req.logIn(user, (err) => {
+  //         if (err) throw err;
+  //         res.send('success');
+  //       });
+  //     }
+  //   });
+  // };
+
+  const signup = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-      const user = await db.User.findOne({
-        where: {
-          email,
-        },
+      const hashedPassword = await bcrypt.hash(password, 12);
+      await db.User.create({
+        email,
+        password: hashedPassword,
       });
-
-      const shaObj = new jsSHA('SHA-256', 'TEXT', { encoding: 'UTF8' });
-      shaObj.update(password);
-      if (user.password === shaObj.getHash('HEX')) {
-        console.log('success');
-        res.cookie('userId', user.id);
-        res.sendStatus(200);
-      } else {
-        res.cookie('userId', null);
-        res.sendStatus(403);
-      }
+      res.send('user created');
     } catch (err) {
       console.log(err);
     } };
@@ -82,6 +108,6 @@ export default function initUsersController(db) {
 
   return {
     // userTrips, getLikedItems, addLikedItem, deleteLikedItem,
-    login,
+    login, signup,
   };
 }

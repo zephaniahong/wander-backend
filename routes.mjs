@@ -16,4 +16,5 @@ export default function bindRoutes(app) {
   app.post('/delete_appointment/:appointmentId', AppointmentsController.deleteAppointment);
   app.post('/update_appointment', AppointmentsController.updateAppointment);
   app.post('/login', UsersController.login);
+  app.post('/signup', UsersController.signup);
 }
