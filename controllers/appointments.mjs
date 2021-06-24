@@ -2,21 +2,28 @@ export default function initAppointmentsController(db) {
   const addAppointment = async (req, res) => {
     const { tripId } = req.params;
     const {
-      description, place_id, structured_formatting, types, startDate, endDate, lat, lng,
+      marker, start, end,
     } = req.body;
+    const {
+      address, lat, lng,
+    } = marker;
+    const {
+      description, place_id, types, structured_formatting,
+    } = address;
+    console.log(marker.address);
     const { main_text, secondary_text } = structured_formatting;
     try {
       const appointment = await db.Appointment.create({
-        text: description,
+        title: description,
         tripId,
-        types,
         lat,
         lng,
-        placeId: place_id,
-        startDate: new Date(startDate),
-        endDate: new Date(endDate),
         mainText: main_text,
         secondaryText: secondary_text,
+        placeId: place_id,
+        types,
+        startDate: start,
+        endDate: end,
       });
       res.send(appointment);
     } catch (err) {
