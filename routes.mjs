@@ -48,5 +48,6 @@ export default function bindRoutes(app, passport) {
   // failureFlash: true,
   app.post('/signup', UsersController.signup);
   app.delete('/logout', UsersController.logout);
-  app.post('/updateTrip', TripsController.update);
+  app.post('/createTrip', TripsController.create);
+  app.get('/tripDetails/:tripId', TripsController.getDetails);
 }

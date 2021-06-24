@@ -1,5 +1,5 @@
 export default function initTripsController(db) {
-  const update = async (req, res) => {
+  const create = async (req, res) => {
     const { location, startDate, endDate } = req.body;
     const { userId } = req.cookies;
     try {
@@ -15,7 +15,16 @@ export default function initTripsController(db) {
     }
   };
 
+  const getDetails = async (req, res) => {
+    const { tripId } = req.params;
+    try {
+      const trip = await db.Trip.findByPk(tripId);
+      res.send(trip);
+    } catch (err) {
+      console.log('error getting trip details', err);
+    }
+  };
   return {
-    update,
+    create, getDetails,
   };
 }
