@@ -37,4 +37,11 @@ export default function bindRoutes(app, passport) {
     }
     return res.send('not authenticated');
   });
+  app.post('/signout', (req, res) => {
+    console.log('backend signout');
+    req.logOut();
+    res.send('success');
+  });
+
+  app.get('/getTrips', TripsController.getTrips);
 }

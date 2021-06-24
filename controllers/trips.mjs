@@ -24,7 +24,21 @@ export default function initTripsController(db) {
       console.log('error getting trip details', err);
     }
   };
+
+  const getTrips = async (req, res) => {
+    const { userId } = req.cookies;
+    try {
+      const trips = await db.Trip.findAll({
+        where: {
+          userId,
+        },
+      });
+      res.send(trips);
+    } catch (err) {
+      console.log('error getting trips', err);
+    }
+  };
   return {
-    create, getDetails,
+    create, getDetails, getTrips,
   };
 }
