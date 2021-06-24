@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
-import LocalStrategy, { Strategy } from 'passport-local';
-import db from './models/index.mjs';
+import { Strategy } from 'passport-local';
 
 export default function initialise(passport, getUserEmail, getUserById) {
   const authenticateUser = async (email, password, done) => {
@@ -21,5 +20,6 @@ export default function initialise(passport, getUserEmail, getUserById) {
   // so if your db column name is something else then have to specifiy
   passport.use(new Strategy({ usernameField: 'email' }, authenticateUser));
   passport.serializeUser((user, done) => { done(null, user.id); });
-  passport.deserializeUser((id, done) => { done(null, id); });
+  passport.deserializeUser((id, done) => {
+    done(null, getUserById(id)); });
 }
