@@ -1,29 +1,21 @@
 export default function initTripsController(db) {
-  // const getTrips = async (req, res) => {
-  //   try {
-  //     const trips = await db.Trip.findAll({
-  //       include: [db.Review, db.User],
-  //     });
-
-  //     res.send(trips);
-  //   } catch (err) {
-  //     console.log('====== getTrips err======\n', err);
-  //   }
-  // };
-
-  // const newTrip = async (req, res) => {
-  //   try {
-  //     const trip = await db.Trip.create({
-  //       userId: 1,
-  //     });
-  //     const tripId = trip.id;
-  //     res.send({ tripId });
-  //   } catch (err) {
-  //     console.log('====== newTrip err======\n', err);
-  //   }
-  // };
+  const update = async (req, res) => {
+    const { location, startDate, endDate } = req.body;
+    const { userId } = req.cookies;
+    try {
+      const trip = await db.Trip.create({
+        userId,
+        country: location.description,
+        startDate,
+        endDate,
+      });
+      res.send(trip);
+    } catch (err) {
+      console.log('error creating trip', err);
+    }
+  };
 
   return {
-    // getTrips, newTrip,
+    update,
   };
 }
