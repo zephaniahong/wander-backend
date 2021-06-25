@@ -44,4 +44,5 @@ export default function bindRoutes(app, passport) {
   });
 
   app.get('/getTrips', TripsController.getTrips);
+  app.post('/addCustomAppointment/:tripId', AppointmentsController.addCustomAppointment);
 }

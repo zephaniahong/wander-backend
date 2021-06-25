@@ -59,6 +59,7 @@ export default function initAppointmentsController(db) {
   };
 
   const updateAppointment = async (req, res) => {
+    console.log(req.body);
     const data = req.body;
     const id = Object.keys(data)[0];
     const changesKeys = Object.keys(data[id]);
@@ -74,7 +75,23 @@ export default function initAppointmentsController(db) {
       console.log('error updating appointment', err);
     }
   };
+
+  const addCustomAppointment = async (req, res) => {
+    const { tripId } = req.params;
+    const { startDate, endDate, title } = req.body;
+    try {
+      const appointment = await db.Appointment.create({
+        tripId,
+        startDate,
+        endDate,
+        title,
+      });
+      res.send(appointment);
+    } catch (err) {
+      console.log('error creating custom appointment', err);
+    }
+  };
   return {
-    addAppointment, getAppointments, deleteAppointment, updateAppointment,
+    addAppointment, getAppointments, deleteAppointment, updateAppointment, addCustomAppointment,
   };
 }
